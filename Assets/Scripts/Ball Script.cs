@@ -4,14 +4,17 @@ using UnityEngine;
 public class BallScript : MonoBehaviour
 {
     public Rigidbody rb;
-
     public float speed = 10f;
+    private Vector3 newVelocity;
+    private bool updateVelocity;
+
+    private Vector3 direction;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb.linearVelocity = Vector3.left * speed;
     }
-
+    
     private void OnCollisionEnter(Collision other)
     {
         Debug.Log($"Collided with: {other.gameObject.name}");
@@ -26,17 +29,19 @@ public class BallScript : MonoBehaviour
             float newXDirection = (other.gameObject.CompareTag("LeftPaddle")) ? 1 : -1;
             float newZDirection = Mathf.Clamp(relativeHitPos, -1f, 1f);
             
-            Vector3 direction = new Vector3(newXDirection, 0, newZDirection).normalized;
+            direction = new Vector3(newXDirection, 0, newZDirection).normalized;
             Debug.Log($"Calculated direction: {direction}");
 
-            // Assign velocity update in FixedUpdate to prevent physics override
             newVelocity = direction * speed;
             updateVelocity = true;
+        } else if (other.gameObject.CompareTag("TopBorder") || other.gameObject.CompareTag("BotBorder"))
+        {
+            direction = new Vector3(direction.x, 0, -direction.z).normalized;
+            newVelocity = direction * speed;
+            updateVelocity = true;
+            Debug.Log($"New Direction After Border Bounce: {direction}");
         }
     }
-    
-    private Vector3 newVelocity;
-    private bool updateVelocity;
 
     private void FixedUpdate()
     {
