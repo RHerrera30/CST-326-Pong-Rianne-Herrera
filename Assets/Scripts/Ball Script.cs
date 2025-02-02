@@ -15,7 +15,7 @@ public class BallScript : MonoBehaviour
         rb.linearVelocity = Vector3.left * speed;
     }
     
-    private void OnCollisionEnter(Collision other)
+    void OnCollisionEnter(Collision other)
     {
         Debug.Log($"Collided with: {other.gameObject.name}");
 
@@ -43,7 +43,12 @@ public class BallScript : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Collided with left or right border");
+    }
+
+    void FixedUpdate()
     {
         if (updateVelocity)
         {
