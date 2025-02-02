@@ -8,6 +8,8 @@ TagManager:
   - RightPaddle
   - TopBorder
   - BotBorder
+  - LeftBorder
+  - RightBorder
   layers:
   - Default
   - TransparentFX
