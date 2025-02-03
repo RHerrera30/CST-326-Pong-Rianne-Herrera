@@ -1,0 +1,61 @@
+using TMPro;
+using UnityEngine;
+
+public class ScorekeeperScript : MonoBehaviour
+{
+    public static ScorekeeperScript instance;
+
+    public int leftScore = 0;
+    public int rightScore = 0;
+    public TextMeshProUGUI leftScoreText;
+    public TextMeshProUGUI rightScoreText;
+
+    void Start()
+    {
+        instance = this;
+    }
+
+    public void addPoint(int player)
+    {
+        //left = 1; right = 2
+        if (player == 1)
+        {
+            leftScore++;
+            leftScoreText.text = leftScore.ToString();
+            Debug.Log("Left score " + leftScore);
+        } else if (player == 2)
+        {
+            rightScore++;
+            rightScoreText.text = rightScore.ToString();
+            Debug.Log("Right score " + rightScore);
+        }
+        CheckWinCondition();
+    }
+
+    void CheckWinCondition()
+    {
+        int winScore = 11;
+    
+        if (leftScore >= winScore)
+        {
+            leftScoreText.text = "WINNER!";
+            rightScoreText.text = "LOSER!";
+            Debug.Log("Game Over, Left Paddle Wins");
+            Invoke(nameof(ResetGame),2f);
+        } else if (rightScore >= winScore)
+        {
+            rightScoreText.text = "WINNER!";
+            leftScoreText.text = "LOSER!";
+            Debug.Log("Game Over, Right Paddle Wins");
+            Invoke(nameof(ResetGame),2f);
+        }
+    }
+
+    private void ResetGame()
+    {
+        leftScore = 0;
+        rightScore = 0;
+        leftScoreText.text = "0";
+        rightScoreText.text = "0";
+    }
+}

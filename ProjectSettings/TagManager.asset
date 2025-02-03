@@ -10,6 +10,7 @@ TagManager:
   - BotBorder
   - LeftBorder
   - RightBorder
+  - Ball
   layers:
   - Default
   - TransparentFX
