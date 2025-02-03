@@ -1,20 +1,22 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BallScript : MonoBehaviour
 {
     public Rigidbody rb;
     public float speed;
+    public Material mat;
     private Vector3 newVelocity;
     private bool updateVelocity;
     private Vector3 startPosition;
-
     private Vector3 direction;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         // rb.linearVelocity = Vector3.left * speed;
         startPosition = transform.position;
+        mat.color = Color.white;
         LaunchBall();
     }
     
@@ -38,7 +40,16 @@ public class BallScript : MonoBehaviour
             newVelocity = direction * speed;
             updateVelocity = true;
             speed += 1f;
-            Debug.Log("Speed: " + speed);
+
+            //Change the color of the ball to match last paddle hit
+            if (other.gameObject.CompareTag("LeftPaddle"))
+            {
+                mat.color = Color.cyan;
+            } else if (other.gameObject.CompareTag("RightPaddle"))
+            {
+                mat.color = Color.red;
+            }
+            
         } else if (other.gameObject.CompareTag("TopBorder") || other.gameObject.CompareTag("BotBorder"))
         {
             direction = new Vector3(direction.x, 0, -direction.z).normalized;
@@ -85,6 +96,7 @@ public class BallScript : MonoBehaviour
         transform.position = startPosition;
         rb.linearVelocity = Vector3.zero;
         speed = 5f;
+        mat.color = Color.white;
         Invoke(nameof(LaunchBall), 1f);
     }
 }
