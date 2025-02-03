@@ -65,7 +65,19 @@ public class BallScript : MonoBehaviour
 
     void LaunchBall()
     {
-        rb.linearVelocity = Vector3.left * speed;
+        if (ScorekeeperScript.instance.leftScored)
+        {
+            rb.linearVelocity = Vector3.right * speed;
+            ScorekeeperScript.instance.leftScored = false;
+        } else if (ScorekeeperScript.instance.rightScored)
+        {
+            rb.linearVelocity = Vector3.left * speed;
+            ScorekeeperScript.instance.rightScored = false;
+        } else
+        {
+            rb.linearVelocity = Vector3.left * speed;
+        }
+        
     }
 
     public void ResetBall()

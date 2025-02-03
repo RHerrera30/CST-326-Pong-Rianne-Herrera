@@ -9,7 +9,8 @@ public class ScorekeeperScript : MonoBehaviour
     public int rightScore = 0;
     public TextMeshProUGUI leftScoreText;
     public TextMeshProUGUI rightScoreText;
-
+    public bool leftScored;
+    public bool rightScored;
     void Start()
     {
         instance = this;
@@ -22,11 +23,13 @@ public class ScorekeeperScript : MonoBehaviour
         {
             leftScore++;
             leftScoreText.text = leftScore.ToString();
+            leftScored = true;
             Debug.Log("Left score " + leftScore);
         } else if (player == 2)
         {
             rightScore++;
             rightScoreText.text = rightScore.ToString();
+            rightScored = true;
             Debug.Log("Right score " + rightScore);
         }
         CheckWinCondition();
