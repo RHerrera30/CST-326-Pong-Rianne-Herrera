@@ -11,6 +11,8 @@ public class ScorekeeperScript : MonoBehaviour
     public TextMeshProUGUI rightScoreText;
     public bool leftScored;
     public bool rightScored;
+    public AudioSource audioSrc;
+    public AudioClip clip;
     void Start()
     {
         instance = this;
@@ -32,6 +34,7 @@ public class ScorekeeperScript : MonoBehaviour
             rightScored = true;
             Debug.Log("Right score " + rightScore);
         }
+        audioSrc.PlayOneShot(clip);
         CheckWinCondition();
     }
 
@@ -45,14 +48,15 @@ public class ScorekeeperScript : MonoBehaviour
             rightScoreText.text = "LOSER!";
             Debug.Log("Game Over, Left Paddle Wins");
             Invoke(nameof(ResetGame),2f);
+
         } else if (rightScore >= winScore)
         {
             rightScoreText.text = "WINNER!";
             leftScoreText.text = "LOSER!";
             Debug.Log("Game Over, Right Paddle Wins");
             Invoke(nameof(ResetGame),2f);
-        }
-    }
+
+        } }
 
     private void ResetGame()
     {

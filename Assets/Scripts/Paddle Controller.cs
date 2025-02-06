@@ -5,18 +5,13 @@ using UnityEngine.InputSystem;
 public class PaddleController : MonoBehaviour
 {
     public Rigidbody rb;
-
     public float speed;
-
-    private Vector3 paddleForce;
     public float bound = 3f;
-
+    public AudioSource audioSrc;
+    public AudioClip clip;
+    
+    private Vector3 paddleForce;
     public InputActionReference move;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    // void Start()
-    // {
-    //     
-    // }
 
     // Update is called once per frame
     void Update()
@@ -32,11 +27,11 @@ public class PaddleController : MonoBehaviour
        
     }
 
-    void FixedUpdate()
+    private void OnCollisionEnter(Collision other)
     {
-        // // rb.linearVelocity = paddleForce * speed;
-        // rb.position = new Vector3(rb.position.x, rb.position.y, Mathf.Clamp(rb.position.z, -bound, bound));
-        // // rb.AddForce(paddleForce * speed, ForceMode.Force);
-        // rb.position = paddleForce * speed;
+        if(other.gameObject.CompareTag("Ball"))
+        {
+            audioSrc.PlayOneShot(clip);
+        }
     }
 }

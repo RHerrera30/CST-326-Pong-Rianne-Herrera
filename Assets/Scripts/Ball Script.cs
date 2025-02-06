@@ -7,6 +7,7 @@ public class BallScript : MonoBehaviour
     public Rigidbody rb;
     public float speed;
     public Material mat;
+    
     private Vector3 newVelocity;
     private bool updateVelocity;
     private Vector3 startPosition;
@@ -58,11 +59,6 @@ public class BallScript : MonoBehaviour
             // Debug.Log($"New Direction After Border Bounce: {direction}");
         }
     }
-
-    // void OnTriggerEnter(Collider other)
-    // {
-    //     Debug.Log("Collided with left or right border");
-    // }
 
     void FixedUpdate()
     {
