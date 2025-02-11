@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 918634869496930975}
   - component: {fileID: 1566346600030151101}
   - component: {fileID: 6958710089538992482}
+  - component: {fileID: 8726830674877833462}
   m_Layer: 0
   m_Name: Speed Boost
   m_TagString: Untagged
@@ -102,9 +103,23 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8726830674877833462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6603562788884230434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca84c54361ced5f4ca8b1a706c36105a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedBoost: 3
+  duration: 3

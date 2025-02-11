@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SpeedBoostScript : MonoBehaviour
 {
-    public float speedBoost = 5f;
+    public float speedBoost = 3f;
 
     public float duration = 3f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
