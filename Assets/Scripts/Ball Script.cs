@@ -12,6 +12,11 @@ public class BallScript : MonoBehaviour
     private bool updateVelocity;
     private Vector3 startPosition;
     private Vector3 direction;
+    private float originalSpeed;
+
+    private float speedBoostTimer = 0f;
+
+    private float speedMultiplier = 1f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -94,5 +99,36 @@ public class BallScript : MonoBehaviour
         speed = 5f;
         mat.color = Color.white;
         Invoke(nameof(LaunchBall), 1f);
+    }
+
+    void Update()
+    {
+        if (speedBoostTimer > 0)
+        {
+            speedBoostTimer -= Time.deltaTime;
+            if (speedBoostTimer <= 0)
+            {
+                ResetSpeed();
+            }
+        }
+    }
+
+    public void ActivateSpeedBoost(float speedBoost, float duration)
+    {
+        originalSpeed = speed;
+        speedMultiplier = speedBoost;
+        speed *= speedMultiplier;
+        Debug.Log($"Speed: {speed}");
+        rb.linearVelocity = rb.linearVelocity.normalized * speed;
+        speedBoostTimer = duration;
+
+    }
+
+    void ResetSpeed()
+    {
+        speedMultiplier = 1f;
+        speed = originalSpeed;
+        Debug.Log($"Speed: {speed}");
+        rb.linearVelocity = rb.linearVelocity.normalized * speed;
     }
 }
