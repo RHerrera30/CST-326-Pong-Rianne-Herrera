@@ -129,6 +129,6 @@ public class BallScript : MonoBehaviour
         speedMultiplier = 1f;
         speed = originalSpeed;
         Debug.Log($"Speed: {speed}");
-        rb.linearVelocity = rb.linearVelocity.normalized * speed;
+        rb.linearVelocity = rb.linearVelocity.normalized * originalSpeed;
     }
 }

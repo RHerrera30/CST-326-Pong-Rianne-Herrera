@@ -13,7 +13,7 @@ public class ScorekeeperScript : MonoBehaviour
     public bool rightScored;
     public AudioSource audioSrc;
     public AudioClip clip;
-    void Start()
+    void Awake()
     {
         instance = this;
     }
