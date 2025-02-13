@@ -13,8 +13,8 @@ public class BallScript : MonoBehaviour
     private Vector3 startPosition;
     private Vector3 direction;
     private float originalSpeed;
-
-    private float speedBoostTimer = 0f;
+    private float speedBoostTimer;
+    private Vector3 originalSize;
 
     private float speedMultiplier = 1f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -22,6 +22,7 @@ public class BallScript : MonoBehaviour
     {
         // rb.linearVelocity = Vector3.left * speed;
         startPosition = transform.position;
+        originalSize = transform.localScale;
         mat.color = Color.white;
         LaunchBall();
     }
@@ -103,13 +104,10 @@ public class BallScript : MonoBehaviour
 
     void Update()
     {
-        if (speedBoostTimer > 0)
+        float mimimumSpeed = 5f;
+        if (speed < mimimumSpeed)
         {
-            speedBoostTimer -= Time.deltaTime;
-            if (speedBoostTimer <= 0)
-            {
-                ResetSpeed();
-            }
+            speed = mimimumSpeed;
         }
     }
 
@@ -124,11 +122,22 @@ public class BallScript : MonoBehaviour
 
     }
 
-    void ResetSpeed()
+    // void ResetSpeed()
+    // {
+    //     speedMultiplier = 1f;
+    //     speed = originalSpeed;
+    //     Debug.Log($"Speed: {speed}");
+    //     rb.linearVelocity = rb.linearVelocity.normalized * originalSpeed;
+    // }
+    
+    public void ChangeBallSize(float sizeMultiplier, float duration)
     {
-        speedMultiplier = 1f;
-        speed = originalSpeed;
-        Debug.Log($"Speed: {speed}");
-        rb.linearVelocity = rb.linearVelocity.normalized * originalSpeed;
+        transform.localScale *= sizeMultiplier;
+        Invoke(nameof(ResetSize), duration);
+    }
+
+    void ResetSize()
+    {
+        transform.localScale = originalSize;
     }
 }

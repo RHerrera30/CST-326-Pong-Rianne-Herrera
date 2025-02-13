@@ -44,14 +44,18 @@ public class ScorekeeperScript : MonoBehaviour
     
         if (leftScore >= winScore)
         {
+            leftScoreText.color = Color.yellow;
             leftScoreText.text = "WINNER!";
+            rightScoreText.color = Color.red;
             rightScoreText.text = "LOSER!";
             Debug.Log("Game Over, Left Paddle Wins");
             Invoke(nameof(ResetGame),2f);
 
         } else if (rightScore >= winScore)
         {
+            rightScoreText.color = Color.yellow;
             rightScoreText.text = "WINNER!";
+            leftScoreText.color = Color.red;
             leftScoreText.text = "LOSER!";
             Debug.Log("Game Over, Right Paddle Wins");
             Invoke(nameof(ResetGame),2f);
